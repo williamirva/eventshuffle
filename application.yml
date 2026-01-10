@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/demo_db
+    url: jdbc:postgresql://postgres:5432/postgres
     username: demo_user
     password: demo_password
     driver-class-name: org.postgresql.Driver
@@ -9,3 +9,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+    flyway:
+      enabled: true
+      locations: classpath:db/migration
+      baseline-on-migrate: true

@@ -1,7 +1,18 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath "org.flywaydb:flyway-database-postgresql:11.20.0"
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.0.1'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id "org.flywaydb.flyway" version "11.20.0"
+	id 'nu.studer.jooq' version '9.0'
 }
 
 group = 'com.example'
@@ -10,7 +21,7 @@ description = 'eventshuffle'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
+		languageVersion = JavaLanguageVersion.of(25)
 	}
 }
 
@@ -19,12 +30,64 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-jooq'
+
+	implementation 'org.postgresql:postgresql:42.7.3'
+
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.flywaydb:flyway-database-postgresql:11.20.0'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	runtimeOnly 'org.postgresql:postgresql'
+
+	jooqGenerator 'org.postgresql:postgresql:42.7.3'
+}
+
+flyway {
+	url = 'jdbc:postgresql://localhost:5432/postgres'
+	user = 'demo_user'
+	password = 'demo_password'
+}
+
+jooq {
+	version = '3.19.29'
+	configurations {
+		main {
+			generationTool {
+				jdbc {
+					driver = 'org.postgresql.Driver'
+					url = 'jdbc:postgresql://localhost:5432/postgres'
+					user = 'demo_user'
+					password = 'demo_password'
+				}
+				generator {
+					name = 'org.jooq.codegen.DefaultGenerator'
+					database {
+						name = 'org.jooq.meta.postgres.PostgresDatabase'
+						inputSchema = 'public'
+					}
+					generate {
+						records = true
+						immutablePojos = true
+						fluentSetters = true
+					}
+					target {
+						packageName = 'com.example.jooq'
+						directory = 'src/jooq/main'
+					}
+				}
+			}
+		}
+	}
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs += 'src/jooq/main'
+		}
+	}
 }
 
 tasks.named('test') {

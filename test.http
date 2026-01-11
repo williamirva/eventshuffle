@@ -1,0 +1,44 @@
+### List all events
+GET http://localhost:8080/api/v1/event/list
+Accept: application/json
+
+###
+
+### Create a new event
+POST http://localhost:8080/api/v1/event
+Content-Type: application/json
+
+{
+  "name": "Jake's secret party",
+  "dates": [
+    "2014-01-01",
+    "2014-01-05",
+    "2014-01-12"
+  ]
+}
+
+###
+
+### Show an event by ID
+GET http://localhost:8080/api/v1/event/1
+Accept: application/json
+
+###
+
+### Add votes to an event
+POST http://localhost:8080/api/v1/event/1/vote
+Content-Type: application/json
+
+{
+  "voter": "Dick",
+  "votes": [
+    "2014-01-01",
+    "2014-01-05"
+  ]
+}
+
+###
+
+### Get event results (suitable dates)
+POST http://localhost:8080/api/v1/event/1/results
+Accept: application/json

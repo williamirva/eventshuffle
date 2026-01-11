@@ -3,6 +3,7 @@ package com.example.eventshuffle.repository;
 import com.example.eventshuffle.helpers.EventDetailsMapper;
 import com.example.eventshuffle.helpers.EventResultsMapper;
 import com.example.eventshuffle.models.*;
+import com.example.eventshuffle.service.EventNotFoundException;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.example.jooq.Tables.*;
@@ -51,7 +53,7 @@ public class EventRepository {
         });
     }
 
-    public EventDetails getEventWithDetails(long id, DSLContext dsl) {
+    public Optional<EventDetails> getEventWithDetails(long id, DSLContext dsl) {
 
         var records = dsl.select(
                         EVENT.ID,
@@ -65,7 +67,7 @@ public class EventRepository {
                 .where(EVENT.ID.eq(id))
                 .fetch();
 
-        return EventDetailsMapper.map(records);
+        return Optional.ofNullable(EventDetailsMapper.map(records));
     }
 
     public EventDetails addVote(long eventId, EventVoteRequestModel voteRequest, DSLContext context) {
@@ -101,11 +103,13 @@ public class EventRepository {
                 }
             }
 
-            return getEventWithDetails(eventId, transaction);
+
+            return getEventWithDetails(eventId, transaction)
+                    .orElseThrow(() -> new EventNotFoundException(eventId));
         });
     }
 
-    public EventResults getEventResults(long eventId, DSLContext context) {
+    public Optional<EventResults> getEventResults(long eventId, DSLContext context) {
         var records = context.select(
                         EVENT.ID,
                         EVENT.NAME,
@@ -118,6 +122,12 @@ public class EventRepository {
                 .where(EVENT.ID.eq(eventId))
                 .fetch();
 
-        return EventResultsMapper.map(records);
+        return Optional.ofNullable(EventResultsMapper.map(records));
+    }
+
+    public boolean eventExists(long eventId, DSLContext context) {
+        return context.fetchExists(
+                        context.selectOne().from(EVENT)
+                        .where(EVENT.ID.eq(eventId)));
     }
 }

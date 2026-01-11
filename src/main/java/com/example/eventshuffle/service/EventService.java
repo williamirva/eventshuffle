@@ -27,14 +27,18 @@ public class EventService {
     }
 
     public EventDetails getEventDetails(long id) {
-        return this.eventRepository.getEventWithDetails(id, this.context);
+        return this.eventRepository.getEventWithDetails(id, this.context).orElseThrow(()-> new EventNotFoundException(id));
     }
 
     public EventDetails addVote(long id, EventVoteRequestModel eventVoteRequestModel) {
+        if (!this.eventRepository.eventExists(id, context)) {
+            throw new EventNotFoundException(id);
+        }
+
         return this.eventRepository.addVote(id, eventVoteRequestModel, this.context);
     }
 
     public EventResults getEventResults(long id) {
-        return this.eventRepository.getEventResults(id, this.context);
+        return this.eventRepository.getEventResults(id, this.context).orElseThrow(() -> new EventNotFoundException(id));
     }
 }

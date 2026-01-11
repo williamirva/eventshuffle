@@ -65,70 +65,70 @@ public class FlywaySchemaHistory implements Serializable {
     }
 
     /**
-     * Getter for <code>public.flyway_schema_history.installed_rank</code>.
+     * Getter for <code>eventschema.flyway_schema_history.installed_rank</code>.
      */
     public Integer getInstalledRank() {
         return this.installedRank;
     }
 
     /**
-     * Getter for <code>public.flyway_schema_history.version</code>.
+     * Getter for <code>eventschema.flyway_schema_history.version</code>.
      */
     public String getVersion() {
         return this.version;
     }
 
     /**
-     * Getter for <code>public.flyway_schema_history.description</code>.
+     * Getter for <code>eventschema.flyway_schema_history.description</code>.
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Getter for <code>public.flyway_schema_history.type</code>.
+     * Getter for <code>eventschema.flyway_schema_history.type</code>.
      */
     public String getType() {
         return this.type;
     }
 
     /**
-     * Getter for <code>public.flyway_schema_history.script</code>.
+     * Getter for <code>eventschema.flyway_schema_history.script</code>.
      */
     public String getScript() {
         return this.script;
     }
 
     /**
-     * Getter for <code>public.flyway_schema_history.checksum</code>.
+     * Getter for <code>eventschema.flyway_schema_history.checksum</code>.
      */
     public Integer getChecksum() {
         return this.checksum;
     }
 
     /**
-     * Getter for <code>public.flyway_schema_history.installed_by</code>.
+     * Getter for <code>eventschema.flyway_schema_history.installed_by</code>.
      */
     public String getInstalledBy() {
         return this.installedBy;
     }
 
     /**
-     * Getter for <code>public.flyway_schema_history.installed_on</code>.
+     * Getter for <code>eventschema.flyway_schema_history.installed_on</code>.
      */
     public LocalDateTime getInstalledOn() {
         return this.installedOn;
     }
 
     /**
-     * Getter for <code>public.flyway_schema_history.execution_time</code>.
+     * Getter for <code>eventschema.flyway_schema_history.execution_time</code>.
      */
     public Integer getExecutionTime() {
         return this.executionTime;
     }
 
     /**
-     * Getter for <code>public.flyway_schema_history.success</code>.
+     * Getter for <code>eventschema.flyway_schema_history.success</code>.
      */
     public Boolean getSuccess() {
         return this.success;

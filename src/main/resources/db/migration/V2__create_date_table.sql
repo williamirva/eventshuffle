@@ -1,4 +1,4 @@
-CREATE TABLE date (
+CREATE TABLE eventdate (
                        id          BIGSERIAL PRIMARY KEY,
                        eventId     BIGINT,
                        date        DATE,

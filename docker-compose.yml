@@ -3,9 +3,9 @@ version: "3.9"
 services:
   postgres:
     image: postgres:17
-    container_name: demo-postgres
+    container_name: postgres
     environment:
-      POSTGRES_DB: demo_db
+      POSTGRES_DB: eventshuffle_db
       POSTGRES_USER: demo_user
       POSTGRES_PASSWORD: demo_password
     ports:
@@ -15,13 +15,13 @@ services:
 
   app:
     build: .
-    container_name: demo-app
+    container_name: eventshuffle-app
     depends_on:
       - postgres
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/demo_db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/eventshuffle_db
       SPRING_DATASOURCE_USERNAME: demo_user
       SPRING_DATASOURCE_PASSWORD: demo_password
 

@@ -4,12 +4,12 @@
 package com.example.jooq;
 
 
-import com.example.jooq.tables.Date;
 import com.example.jooq.tables.Event;
+import com.example.jooq.tables.Eventdate;
 import com.example.jooq.tables.FlywaySchemaHistory;
 import com.example.jooq.tables.Vote;
-import com.example.jooq.tables.records.DateRecord;
 import com.example.jooq.tables.records.EventRecord;
+import com.example.jooq.tables.records.EventdateRecord;
 import com.example.jooq.tables.records.FlywaySchemaHistoryRecord;
 import com.example.jooq.tables.records.VoteRecord;
 
@@ -21,7 +21,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables in
- * public.
+ * eventschema.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Keys {
@@ -30,8 +30,8 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<DateRecord> DATE_PKEY = Internal.createUniqueKey(Date.DATE, DSL.name("date_pkey"), new TableField[] { Date.DATE.ID }, true);
     public static final UniqueKey<EventRecord> EVENT_PKEY = Internal.createUniqueKey(Event.EVENT, DSL.name("event_pkey"), new TableField[] { Event.EVENT.ID }, true);
+    public static final UniqueKey<EventdateRecord> EVENTDATE_PKEY = Internal.createUniqueKey(Eventdate.EVENTDATE, DSL.name("eventdate_pkey"), new TableField[] { Eventdate.EVENTDATE.ID }, true);
     public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("flyway_schema_history_pk"), new TableField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
     public static final UniqueKey<VoteRecord> VOTE_PKEY = Internal.createUniqueKey(Vote.VOTE, DSL.name("vote_pkey"), new TableField[] { Vote.VOTE.ID }, true);
 }

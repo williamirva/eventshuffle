@@ -4,35 +4,35 @@
 package com.example.jooq;
 
 
-import com.example.jooq.tables.Date;
 import com.example.jooq.tables.Event;
+import com.example.jooq.tables.Eventdate;
 import com.example.jooq.tables.FlywaySchemaHistory;
 import com.example.jooq.tables.Vote;
 
 
 /**
- * Convenience access to all tables in public.
+ * Convenience access to all tables in eventschema.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
-     * The table <code>public.date</code>.
-     */
-    public static final Date DATE = Date.DATE;
-
-    /**
-     * The table <code>public.event</code>.
+     * The table <code>eventschema.event</code>.
      */
     public static final Event EVENT = Event.EVENT;
 
     /**
-     * The table <code>public.flyway_schema_history</code>.
+     * The table <code>eventschema.eventdate</code>.
+     */
+    public static final Eventdate EVENTDATE = Eventdate.EVENTDATE;
+
+    /**
+     * The table <code>eventschema.flyway_schema_history</code>.
      */
     public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
 
     /**
-     * The table <code>public.vote</code>.
+     * The table <code>eventschema.vote</code>.
      */
     public static final Vote VOTE = Vote.VOTE;
 }
